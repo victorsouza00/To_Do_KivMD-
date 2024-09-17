@@ -54,9 +54,7 @@ class Database:
         self.cursor.execute("INSERT INTO deleted_tasks(id, task, due_date) VALUES(?, ?, ?)", (task_to_delete[0], task_to_delete[1], task_to_delete[2]))
         self.cursor.execute("DELETE FROM tasks WHERE id=?", (taskid,))
 
-    def close_db_connection(self):
-        self.con.close()
-    
+   
 
     def create_deleted_tasks_table(self):
         """Create deleted tasks table"""
@@ -68,3 +66,8 @@ class Database:
     def get_deleted_tasks(self):
         """Retrieve deleted tasks"""
         return self.cursor.execute("SELECT id, task, due_date, deleted_at FROM deleted_tasks").fetchall()
+    
+    
+    def close_db_connection(self):
+            self.con.close()
+        

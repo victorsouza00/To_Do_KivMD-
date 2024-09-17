@@ -109,17 +109,17 @@ class MainApp(MDApp):
             task_item.ids.check.color = checkbox_color  # Define a cor do checkbox
 
     def show_deleted_tasks(self):
-        """Show the history of deleted tasks"""
+        """Mostra as atividades deletadas"""
         deleted_tasks = db.get_deleted_tasks()
         self.root.ids.container.clear_widgets()  # Limpar a lista atual
 
         for task in deleted_tasks:
-            add_task = ListItemWithCheckbox(pk=task[0], text='[s]'+task[1]+'[/s]', secondary_text=f'{task[2]} - Deleted at {task[3]}')
+            add_task = ListItemWithCheckbox(pk=task[0], text='[s]'+task[1]+'[/s]', secondary_text=f'{task[2]} - Deletado as   {task[3]}')
             self.root.ids.container.add_widget(add_task)
 
     
     def show_main_tasks(self):
-        """Show the main task list (active tasks)"""
+        """Mostra as atividades principais"""
         completed_tasks, uncomplete_tasks = db.get_tasks()
         self.root.ids.container.clear_widgets()  # Limpar a lista atual
 
@@ -133,7 +133,7 @@ class MainApp(MDApp):
             secondary_text_color = (150/255, 150/255, 150/255, 1)
             checkbox_color = (200/255, 200/255, 200/255, 1)
 
-        # Mostrar tarefas não completas
+        # Mostrar tarefas incompletas
         if uncomplete_tasks:
             for task in uncomplete_tasks:
                 add_task = ListItemWithCheckbox(pk=task[0], text=task[1], secondary_text=task[2])
@@ -157,14 +157,6 @@ class MainApp(MDApp):
                 self.root.ids.container.add_widget(add_task)
 
 
-
-
-
-
-
-
-
-
     
 
     def build(self):
@@ -182,7 +174,7 @@ class MainApp(MDApp):
         self.task_list_dialog.open()
 
     def on_start(self):
-        """Load the saved tasks and add them to the MDList widget when the application starts"""
+        
         try:
             completed_tasks, uncomplete_tasks = db.get_tasks()
 
